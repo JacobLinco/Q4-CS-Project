@@ -72,9 +72,12 @@ li {
 }  
 
   a:hover {background: #d1d1d1;}
-  
+  #finish:hover{
+    background:#f2f2f2
+  }
 
   #ranks{
+    margin-top:20px;
     border-collapse:collapse;
     width:100%;
 }

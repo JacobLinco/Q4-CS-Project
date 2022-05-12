@@ -1,9 +1,13 @@
-//needs a way for both webpages to have different questions
+//needs a way for both webpages to have different questions - we need to solve the questionbank resetting problem
+
+//creates variables that will contain the quiz questions, and will be saved in the local storage of the user
+
 let firstQuizStorage = localStorage.getItem("firstQuizStorage");
 let secondQuizStorage = localStorage.getItem("secondQuizStorage");
+
 var questionBank; 
 var pageForm = document.forms[0];
-//main problem is that everytime the webpage resets this part gets repeated so the array splices are rendered useless cus this part just defines the questionBank as full again
+//main problem is that everytime the webpage resets this part gets repeated so the array splices are rendered useless cus this part just defines the questionBank as full again, so this needs to be run only once
 questionBank = [
   //True or False 
   '<label>In the original Tetris, there are 7 different types of blocks.</label><br><select id="tetris" name="tetris"><option value=""></option><option value="true">True</option><option value="false">False</option></select><br><br>',
@@ -63,6 +67,7 @@ function quizQuestions1(qnum, start) {
 //adds question to quiz form and removes question from question bank until there are 15 questions
     
   if (firstQuizStorage) {
+    //if the first quiz's storage already has a value, it sets the value of the 1st quiz form as those questions
     firstQuiz.innerHTML = firstQuizStorage;
   }
   else {
@@ -72,27 +77,34 @@ function quizQuestions1(qnum, start) {
       questionBank.splice(i, 1);
     }
     
-    document.getElementById("firstQuiz").innerHTML += "<input type='reset' value='Reset Answers'><br><br>";
+    firstQuiz.innerHTML += "<input type='reset' value='Reset Answers'><br><br>";
+    //sets the value of the first quiz storage as the first quiz's questions
     localStorage.setItem("firstQuizStorage", firstQuiz.innerHTML);
   }
-  
+
+  //updates the question bank to include the removed questions
   localStorage.setItem("questionBank", questionBank);
   questionBank = localStorage.getItem("questionBank");
 }
 
 function quizQuestions2(qnum, start) {
   if (secondQuizStorage) {
-    document.getElementById("secondQuiz").innerHTML = secondQuizStorage;
-  }    
+    //if the second quiz's storage already has a value, it sets the value of the 2nd quiz form as those questions
+    secondQuiz.innerHTML = secondQuizStorage;
+  }
   else {
     for(var j=1;j<=qnum;j++) {
       var i = Math.floor(Math.random()*questionBank.length);
-      document.getElementById("secondQuiz").innerHTML += start - 1 + j + ". " + questionBank[i];
+      secondQuiz.innerHTML += start - 1 + j + ". " + questionBank[i];
       questionBank.splice(i, 1);
     }
-    document.getElementById("secondQuiz").innerHTML += "<input type='reset' value='Reset Answers'><br><br>";
-    localStorage.setItem("secondQuizStorage", document.getElementById("secondQuiz").innerHTML);
+    secondQuiz.innerHTML += "<input type='reset' value='Reset Answers'><br><br>";
+    secondQuiz.innerHTML += "<input type='submit' value='Submit'><br><br>";
+    //sets the value of the second quiz storage as the second quiz's questions
+    localStorage.setItem("secondQuizStorage", secondQuiz.innerHTML);
   }
+
+  //updates the question bank to include the removed questions
   localStorage.setItem("questionBank", questionBank);
   questionBank = localStorage.getItem("questionBank");
 };
@@ -100,7 +112,8 @@ function quizQuestions2(qnum, start) {
 //lets button inputs play sound
 function playSound(x) {
   var music;
-  
+
+  //sets a specific audio for each listening question to the variable "music"
   switch(x) {
     case "overwatch":
       music = new Audio("../audio/overwatch.mp3");
@@ -121,6 +134,30 @@ function playSound(x) {
   
   music.play();
 };
+
+function hoverin(){
+  finish.style.background='#f2f2f2';
+};
+function hoverout(){
+  finish.style.background='#d1d1d1';
+};
+
+//confirms submission when submit is clicked. Changes attributes of 'finish' button.
+pageForm.addEventListener("submit", function(event) {
+  //prevents submission
+  event.preventDefault();
+
+  //Uses user confirmation as condition. 
+	if (confirm('Proceed to submit?')) {
+    //changes adds 
+    pageForm.addEventListener("mouseover",hoverin);
+    pageForm.addEventListener("mouseout",hoverout);
+    finish.href = "ranks.html";
+		saveFormData();
+		pageForm.submit();
+	}
+});
+
 function saveFormData() {
 
   formData = {
@@ -184,9 +221,11 @@ function saveFormData() {
 
 //adds a row to ranking table with all data
 function ranking(){
+  
 };
+	
 
-//restarts the questions everytime the quiz is reset
+//restarts the questions everytime the quiz is reset by removing the value of the local storage for the quiz questions
 function restart() {
   localStorage.removeItem("firstQuizStorage");
   localStorage.removeItem("secondQuizStorage");
