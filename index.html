@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Trivia Quiz Game for CS Project">
+  <meta name="keywords" content="Quiz Game, Games, CS">
+  <meta name="author" content="Jacob Linco, Kobe San Agustin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gaming Trivia Quiz</title>
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  
+<div class="column">
+  <div class="header">
+    <h1>Gaming Trivia Quiz</h1>
+    <h5>made by Jacob Benedict Linco & Kobe Mackenzie San Agustin from           
+    Magnesium</h5>
+  </div>
+  
+  <div class="mBody">
+    <p>this website tests your trivia knowledge in multiple famous video games. 
+    There will be questions on game characters, game mechanics, game lore, and a        variety of other game-related things. There will also be some lifelines for 
+    you to use in case you are ever in trouble.</p>
+
+    <div>
+      <h4>Sign Up: </h4>
+      <form
+       name="signup"
+       action="htdocs/ranks.html"
+       onsubmit="return onSubmit();">
+        
+        <label>username: </label><br>
+        <input type="text" id="uname" name="uname" required></input><br><br>
+
+        <label>section(optional): </label><br>
+        <input type="text" id="sec" name="sec"></input><br><br>
+
+        <input type="submit" value="Submit"> </input>
+      </form>
+    </div>
+    
+  </div>
+</div>
+  
+<a href="htdocs/how2play.html" class="nextPage">Next Page</a>
+  
+<script src="js/script.js"></script>
+  
+</body>
+
+</html>

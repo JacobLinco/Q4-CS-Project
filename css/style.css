@@ -1,0 +1,95 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+input, select{
+  border:1px solid gray;;
+  border-radius:10px;
+  box-shadow: 5px 5px #ebebeb;
+}
+  input[type="button"]{
+    box-shadow:0 0;
+  }
+
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin:0;
+}
+
+.header{
+  top:0px;
+  position:sticky;
+  margin:0px;
+  background-color: #ecacac;
+  padding: 5px;
+  text-align: center;
+  border-bottom: 2px solid #581d1d;
+}
+.header h1{
+  padding:0;
+}
+h5, h2, h1{
+  padding:0px 15px;
+  text-align:center;
+}
+
+.mBody{
+  width:80%;
+  margin:0 10%;
+}
+
+li {
+  font-style:italic;
+  font-size:1em;
+}
+.sub{
+  margin-left:20px;
+  font-size: 0.9em;
+}
+
+.previousPage, .restart {
+  display:inline-block;
+  padding: 0.3rem 0.6rem;
+  border-radius:25px;
+  border:1px solid black;
+  text-align:center;
+  text-decoration:none;
+  color:black;
+  background-color:#f2f2f2;
+}
+
+.nextPage {
+  float:right;
+  padding: 0.3rem 0.6rem;
+  border-radius:25px;
+  border:1px solid black;
+  text-align:center;
+  text-decoration:none;
+  color:black;
+  background-color:#f2f2f2;
+}  
+
+  a:hover {background: #d1d1d1;}
+  
+
+  #ranks{
+    border-collapse:collapse;
+    width:100%;
+}
+  th, td{
+    width:33%;
+    text-align:center;
+    border:1px solid #787878;
+  }
+
+  #ranks tr:nth-child(even){background-color: #ebebeb;}
+
+#firstQuiz, #secondQuiz {
+  margin-top:20px;
+}
+
+@media screen and (max-width:600px) {
+  .column {
+    width: 100%;
