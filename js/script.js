@@ -1,12 +1,12 @@
 //needs a way for both webpages to have different questions - we need to solve the questionbank resetting problem
 
-//creates variables that will contain the quiz questions, and will be saved in the local storage of the user
-
+//creates variables that will contain the quiz questions, and will be saved in items inside the local storage of the user
 let firstQuizStorage = localStorage.getItem("firstQuizStorage");
 let secondQuizStorage = localStorage.getItem("secondQuizStorage");
 
 var questionBank; 
 var pageForm = document.forms[0];
+var points = 0;
 //main problem is that everytime the webpage resets this part gets repeated so the array splices are rendered useless cus this part just defines the questionBank as full again, so this needs to be run only once
 questionBank = [
   //True or False 
@@ -59,15 +59,16 @@ questionBank = [
   '<label>How many units has the Grand Theft Auto franchise sold as of 2022?</label><br><input type="number" min="10000000" step="10000000" id="gta" name="gta"></input><br><br>',
 ];
 
+//sets the local storage item "questionBank", into the value of the variable "questionBank"
 localStorage.setItem("questionBank", questionBank);
+//this is just a temporary thing to see the value of it, and when i tested it the length was always 35 so that means the value gets declared everytime, meaning the questions arent deleted
 console.log(questionBank);
-//main thing we need is so that the array splices stick to the local storage
+//main thing we need is so that the array splices stick to the local storage // this can be attained if the questionBank = array[]; isn't set everytime javascript is run
 
+//adds question to quiz form 1 and removes questions from question bank until there are 15 questions
 function quizQuestions1(qnum, start) {
-//adds question to quiz form and removes question from question bank until there are 15 questions
-    
-  if (firstQuizStorage) {
-    //if the first quiz's storage already has a value, it sets the value of the 1st quiz form as those questions
+  /if (firstQuizStorage) {
+    //if the first quiz's storage already has a value, it sets the value of the 1st     quiz form as those questions
     firstQuiz.innerHTML = firstQuizStorage;
   }
   else {
@@ -76,9 +77,9 @@ function quizQuestions1(qnum, start) {
       firstQuiz.innerHTML += start - 1 + j + ". " + questionBank[i];
       questionBank.splice(i, 1);
     }
-    
     firstQuiz.innerHTML += "<input type='reset' value='Reset Answers'><br><br>";
-    //sets the value of the first quiz storage as the first quiz's questions
+    
+    //sets the value of the first quiz's local storage as the first quiz's questions
     localStorage.setItem("firstQuizStorage", firstQuiz.innerHTML);
   }
 
@@ -87,6 +88,7 @@ function quizQuestions1(qnum, start) {
   questionBank = localStorage.getItem("questionBank");
 }
 
+//adds question to quiz form 2 and removes questions from question bank until there are 10 questions
 function quizQuestions2(qnum, start) {
   if (secondQuizStorage) {
     //if the second quiz's storage already has a value, it sets the value of the 2nd quiz form as those questions
@@ -100,7 +102,7 @@ function quizQuestions2(qnum, start) {
     }
     secondQuiz.innerHTML += "<input type='reset' value='Reset Answers'><br><br>";
     secondQuiz.innerHTML += "<input type='submit' value='Submit'><br><br>";
-    //sets the value of the second quiz storage as the second quiz's questions
+    //sets the value of the second quiz's local storage as the second quiz's questions
     localStorage.setItem("secondQuizStorage", secondQuiz.innerHTML);
   }
 
@@ -147,11 +149,11 @@ pageForm.addEventListener("submit", function(event) {
   //prevents submission
   event.preventDefault();
 
-  //Uses user confirmation as condition. 
+//changes attributes of 'finish' on submission, using user confirmation as          condition
 	if (confirm('Proceed to submit?')) {
-    //changes adds 
     pageForm.addEventListener("mouseover",hoverin);
     pageForm.addEventListener("mouseout",hoverout);
+    finish.innerHTML = "Finish Quiz"
     finish.href = "ranks.html";
 		saveFormData();
 		pageForm.submit();
@@ -215,9 +217,31 @@ function saveFormData() {
      gta:gta.value
   }
 
+  //turns formData object into string and saves it in local storage
   let formDataString = JSON.stringify(formData);
 	localStorage.setItem("formDataObj", formDataString);
 }
+
+function pointCalc() {
+  if(formData.tetris = "true") {
+    points++;
+  };
+  if(formData.valorant = "true") {
+    points++;
+  };
+  if(formData.poke_t = "true") {
+    points++;
+  };
+  if(formData.sonic = "true") {
+    points++;
+  };
+  if(formData.au_award = "true") {
+    points++;
+  };
+
+  points_print.innerHTML += points;
+};
+
 
 //adds a row to ranking table with all data
 function ranking(){

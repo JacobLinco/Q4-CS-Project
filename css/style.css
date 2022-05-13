@@ -76,7 +76,12 @@ li {
     background:#f2f2f2
   }
 
-  #ranks{
+#scores  li{
+  font-style: normal;
+  list-style-type: none;
+}
+
+#ranks{
     margin-top:20px;
     border-collapse:collapse;
     width:100%;
@@ -87,7 +92,11 @@ li {
     border:1px solid #787878;
   }
 
-  #ranks tr:nth-child(even){background-color: #ebebeb;}
+  th{
+    background: #ff6161;
+  }
+
+  #ranks tr:nth-child(even){background-color: #fed7d7;}
 
 #firstQuiz, #secondQuiz {
   margin-top:20px;
